@@ -1,69 +1,161 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import {
+  effects,
+  EffectItem,
+  getRandomEffects,
+} from "@/lib/effects";
+import EffectsLayer from "@/components/EffectsLayer";
 
 export default function Home() {
+  const [count, setCount] = useState<number | null>(null);
+  const [error, setError] = useState("");
+  const [activeEffects, setActiveEffects] = useState<EffectItem[]>([]);
+
+  useEffect(() => {
+    const loadCounter = async () => {
+      const { data, error } = await supabase
+        .from("global_counter")
+        .select("count")
+        .eq("id", 1)
+        .single();
+
+      if (error) {
+        console.error(error);
+        setError("Failed to load counter.");
+        return;
+      }
+
+      setCount(Number(data.count));
+    };
+
+    loadCounter();
+
+    const channel = supabase
+      .channel("global-counter")
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "global_counter",
+          filter: "id=eq.1",
+        },
+        (payload) => {
+          setCount(Number(payload.new.count));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const runEffects = (selectedEffects: EffectItem[]) => {
+    setActiveEffects([]);
+
+    setTimeout(() => {
+      setActiveEffects(selectedEffects);
+    }, 20);
+
+    const longestDuration = Math.max(
+      ...selectedEffects.map((effect) => effect.duration)
+    );
+
+    setTimeout(() => {
+      setActiveEffects([]);
+    }, longestDuration + 50);
+  };
+
+  const runSingleEffect = (effect: EffectItem) => {
+    runEffects([effect]);
+  };
+
+  const triggerRandomEffects = () => {
+    runEffects(getRandomEffects());
+  };
+
+  const handleClick = async () => {
+    setError("");
+
+    triggerRandomEffects();
+
+    const { data, error } = await supabase.rpc("increment_counter");
+
+    if (error) {
+      console.error(error);
+      setError("Failed to update counter.");
+      return;
+    }
+
+    if (data !== null) {
+      setCount(Number(data));
+    }
+  };
+
+  const pageClasses = activeEffects
+    .filter((effect) => effect.category !== "layer")
+    .map((effect) => effect.name)
+    .join(" ");
+
+  const layerEffects = activeEffects
+    .filter((effect) => effect.category === "layer")
+    .map((effect) => effect.name);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className={`page ${pageClasses}`}>
+      {layerEffects.map((effectName) => (
+        <EffectsLayer
+          key={effectName}
+          effect={effectName}
         />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
+      ))}
+
+      {error ? (
+        <p>{error}</p>
+      ) : count === null ? (
+        <p>Loading...</p>
+      ) : (
+        <>
+          <h1 className="count">
+            {count.toLocaleString()}
           </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+
+          <div className="button-wrap">
+            <button
+              className="button"
+              onClick={handleClick}
+              aria-label="No Meaning Button"
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+        </>
+      )}
+
+      {process.env.NODE_ENV === "development" && (
+        <div className="effect-debug-panel">
+          <div className="effect-debug-title">
+            EFFECT TEST
+          </div>
+
+          <div className="effect-debug-buttons">
+            {effects.map((effectItem) => (
+              <button
+                key={effectItem.name}
+                className="effect-debug-button"
+                onClick={() => runSingleEffect(effectItem)}
+              >
+                {effectItem.name}
+              </button>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      )}
+    </main>
   );
 }
+
+
+

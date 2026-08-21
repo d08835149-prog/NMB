@@ -1,0 +1,634 @@
+.page.pulse .button {
+  animation: pulseEffect 0.4s ease-out;
+}
+
+.page.shake {
+  animation: shakeEffect 0.3s ease;
+}
+
+.page.flash {
+  animation: flashEffect 0.35s ease;
+}
+
+.page.grow .button {
+  animation: growEffect 0.4s ease;
+}
+
+.page.spin .button {
+  animation: spinEffect 0.5s ease;
+}
+
+.page.wave .button-wrap::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160px;
+  height: 160px;
+  border: 3px solid rgba(230, 0, 0, 0.35);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: waveEffect 0.5s ease-out;
+  pointer-events: none;
+}
+
+.page.tilt .button {
+  animation: tiltEffect 0.4s ease;
+}
+
+.page.rainbow {
+  animation: rainbowEffect 0.7s linear;
+}
+
+.page.blackout {
+  animation: blackoutEffect 0.5s ease;
+}
+
+.page.invert {
+  animation: invertEffect 0.5s ease;
+}
+
+.page.zoom {
+  animation: zoomEffect 0.45s ease;
+}
+
+.page.bounce .button {
+  animation: bounceEffect 0.55s ease;
+}
+
+.page.earthquake {
+  animation: earthquakeEffect 0.4s linear;
+}
+
+.page.blur {
+  animation: blurEffect 0.5s ease;
+}
+
+.page.disco {
+  animation: discoEffect 0.65s steps(1);
+}
+
+
+/* PULSE */
+
+@keyframes pulseEffect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* SHAKE */
+
+@keyframes shakeEffect {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-15px);
+  }
+
+  40% {
+    transform: translateX(15px);
+  }
+
+  60% {
+    transform: translateX(-10px);
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+
+/* FLASH */
+
+@keyframes flashEffect {
+  0%,
+  100% {
+    background: #ffffff;
+  }
+
+  50% {
+    background: #ffbcbc;
+  }
+}
+
+
+/* GROW */
+
+@keyframes growEffect {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.45);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* SPIN */
+
+@keyframes spinEffect {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* WAVE */
+
+@keyframes waveEffect {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+
+/* TILT */
+
+@keyframes tiltEffect {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-15deg);
+  }
+
+  75% {
+    transform: rotate(15deg);
+  }
+}
+
+
+/* RAINBOW */
+
+@keyframes rainbowEffect {
+  0% {
+    background: #ff0000;
+  }
+
+  16% {
+    background: #ff8800;
+  }
+
+  32% {
+    background: #ffff00;
+  }
+
+  48% {
+    background: #00ff00;
+  }
+
+  64% {
+    background: #00ffff;
+  }
+
+  80% {
+    background: #7b00ff;
+  }
+
+  100% {
+    background: #ffffff;
+  }
+}
+
+
+/* BLACKOUT */
+
+@keyframes blackoutEffect {
+  0%,
+  100% {
+    background: #ffffff;
+  }
+
+  50% {
+    background: #000000;
+  }
+}
+
+
+/* INVERT */
+
+@keyframes invertEffect {
+  0%,
+  100% {
+    filter: invert(0);
+  }
+
+  50% {
+    filter: invert(1);
+  }
+}
+
+
+/* ZOOM */
+
+@keyframes zoomEffect {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+
+/* BOUNCE */
+
+@keyframes bounceEffect {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-70px);
+  }
+
+  55% {
+    transform: translateY(20px);
+  }
+
+  75% {
+    transform: translateY(-15px);
+  }
+
+  90% {
+    transform: translateY(5px);
+  }
+}
+
+
+/* EARTHQUAKE */
+
+@keyframes earthquakeEffect {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  10% {
+    transform: translate(-10px, 6px);
+  }
+
+  20% {
+    transform: translate(10px, -7px);
+  }
+
+  30% {
+    transform: translate(-8px, -6px);
+  }
+
+  40% {
+    transform: translate(12px, 5px);
+  }
+
+  50% {
+    transform: translate(-7px, 8px);
+  }
+
+  60% {
+    transform: translate(9px, -5px);
+  }
+
+  70% {
+    transform: translate(-10px, 4px);
+  }
+
+  80% {
+    transform: translate(8px, -7px);
+  }
+
+  90% {
+    transform: translate(-5px, 5px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+
+/* BLUR */
+
+@keyframes blurEffect {
+  0%,
+  100% {
+    filter: blur(0);
+  }
+
+  50% {
+    filter: blur(10px);
+  }
+}
+
+
+/* DISCO */
+
+@keyframes discoEffect {
+  0% {
+    background: #ff0080;
+  }
+
+  15% {
+    background: #00ffff;
+  }
+
+  30% {
+    background: #ffff00;
+  }
+
+  45% {
+    background: #7b00ff;
+  }
+
+  60% {
+    background: #00ff66;
+  }
+
+  75% {
+    background: #ff3300;
+  }
+
+  90% {
+    background: #0099ff;
+  }
+
+  100% {
+    background: #ffffff;
+  }
+}
+
+/* GLITCH */
+
+.page.glitch {
+  animation: glitchEffect 0.5s steps(2);
+}
+
+@keyframes glitchEffect {
+  0% {
+    transform: translate(0);
+    filter: none;
+  }
+
+  20% {
+    transform: translate(-8px, 4px);
+    filter: hue-rotate(90deg);
+  }
+
+  40% {
+    transform: translate(8px, -4px);
+    filter: contrast(2);
+  }
+
+  60% {
+    transform: translate(-5px, -3px);
+    filter: hue-rotate(240deg);
+  }
+
+  80% {
+    transform: translate(6px, 3px);
+    filter: saturate(3);
+  }
+
+  100% {
+    transform: translate(0);
+    filter: none;
+  }
+}
+
+
+/* SCREEN ROTATE */
+
+.page.screenRotate {
+  animation: screenRotateEffect 0.7s ease-in-out;
+}
+
+@keyframes screenRotateEffect {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(180deg) scale(0.8);
+  }
+
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+/* ULTRA RARE - CATACLYSM */
+
+.page.cataclysm {
+  animation: cataclysmPage 1.8s ease-in-out;
+}
+
+.page.cataclysm .button {
+  animation:
+    cataclysmButton 1.8s ease-in-out,
+    cataclysmGlow 0.15s linear infinite;
+}
+
+.page.cataclysm .count {
+  animation: cataclysmCount 1.8s ease-in-out;
+}
+
+.page.cataclysm::before,
+.page.cataclysm::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 5000;
+}
+
+.page.cataclysm::before {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent 0 20px,
+      rgba(255, 0, 0, 0.2) 20px 24px
+    );
+
+  animation: cataclysmOverlay 0.18s linear infinite;
+}
+
+.page.cataclysm::after {
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 0, 0, 0.35),
+      transparent 65%
+    );
+
+  animation: cataclysmBlast 1.8s ease-out;
+}
+
+@keyframes cataclysmPage {
+  0% {
+    transform: scale(1) rotate(0deg);
+    filter: none;
+    background: #ffffff;
+  }
+
+  15% {
+    transform: scale(1.05) rotate(-2deg);
+    filter: contrast(2) saturate(3);
+    background: #ff0000;
+  }
+
+  30% {
+    transform: scale(0.95) rotate(2deg);
+    filter: invert(1);
+    background: #000000;
+  }
+
+  45% {
+    transform: scale(1.08) rotate(-3deg);
+    filter: hue-rotate(120deg) contrast(2);
+    background: #ffff00;
+  }
+
+  60% {
+    transform: scale(0.98) rotate(3deg);
+    filter: hue-rotate(240deg) saturate(4);
+    background: #00ffff;
+  }
+
+  75% {
+    transform: scale(1.04) rotate(-1deg);
+    filter: blur(2px) contrast(2);
+    background: #ff00ff;
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    filter: none;
+    background: #ffffff;
+  }
+}
+
+@keyframes cataclysmButton {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  20% {
+    transform: scale(1.8) rotate(180deg);
+  }
+
+  40% {
+    transform: scale(0.5) rotate(360deg);
+  }
+
+  60% {
+    transform: scale(2.2) rotate(540deg);
+  }
+
+  80% {
+    transform: scale(0.8) rotate(720deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(1080deg);
+  }
+}
+
+@keyframes cataclysmGlow {
+  0% {
+    box-shadow:
+      0 10px 0 #a80000,
+      0 0 10px red;
+  }
+
+  50% {
+    box-shadow:
+      0 10px 0 #a80000,
+      0 0 60px red,
+      0 0 100px orange;
+  }
+
+  100% {
+    box-shadow:
+      0 10px 0 #a80000,
+      0 0 10px red;
+  }
+}
+
+@keyframes cataclysmCount {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.7) rotate(-6deg);
+  }
+
+  50% {
+    transform: scale(0.7) rotate(6deg);
+  }
+
+  75% {
+    transform: scale(1.5) rotate(-3deg);
+  }
+}
+
+@keyframes cataclysmOverlay {
+  from {
+    transform: translate(0, 0);
+  }
+
+  to {
+    transform: translate(40px, 40px);
+  }
+}
+
+@keyframes cataclysmBlast {
+  0% {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+
+  20% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}

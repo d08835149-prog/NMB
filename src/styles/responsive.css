@@ -1,0 +1,15 @@
+@media (max-width: 600px) {
+  .page {
+    gap: 60px;
+  }
+
+  .count {
+    font-size: 48px;
+    letter-spacing: -1px;
+  }
+
+  .button {
+    width: 130px;
+    height: 130px;
+  }
+}
