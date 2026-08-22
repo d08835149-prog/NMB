@@ -1,4 +1,4 @@
-export type EffectCategory = "page" | "button" | "layer";
+export type EffectCategory = "page" | "button" | "layer" | "main";
 
 export type EffectItem = {
   name: string;
@@ -38,6 +38,13 @@ export const effects: EffectItem[] = [
   { name: "matrix", duration: 1400, category: "layer" },
   { name: "clones", duration: 900, category: "layer" },
   { name: "cataclysm", duration: 1800, category: "page" },
+
+  // MAIN
+  { name: "teleport", duration: 1500, category: "main" },
+  { name: "numbersEverywhere", duration: 1600, category: "main", },
+  { name: "fakeCrash", duration: 1400, category: "main", },
+  { name: "redFlood", duration: 1700, category: "main", },
+  { name: "orbit", duration: 1800, category: "main", },
 ];
 
 function randomFromCategory(category: EffectCategory) {
@@ -76,6 +83,20 @@ export function getRandomEffects(): EffectItem[] {
   ];
 
   const shuffled = [...categories].sort(() => Math.random() - 0.5);
+
+  const mainRoll = Math.random();
+
+  if (mainRoll < 0.08) {
+    const mainEffects = effects.filter(
+      (effect) => effect.category === "main"
+    );
+
+    return [
+      mainEffects[
+        Math.floor(Math.random() * mainEffects.length)
+      ],
+    ];
+  }
 
   return shuffled
     .slice(0, effectCount)

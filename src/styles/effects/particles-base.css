@@ -1,0 +1,14 @@
+.effects-layer {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}

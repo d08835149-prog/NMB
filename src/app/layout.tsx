@@ -3,7 +3,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "../styles/button.css";
 import "../styles/screen-effects.css";
-import "../styles/particle-effects.css";
+import "../styles/effects/particles-base.css";
+import "../styles/effects/particles-basic.css";
+import "../styles/effects/particles-special.css";
+import "../styles/effects/teleport.css";
+import "../styles/effects/numbers-everywhere.css";
+import "../styles/effects/fake-crash.css";
+import "../styles/effects/red-flood.css";
+import "../styles/effects/orbit.css";
 import "../styles/responsive.css";
 
 

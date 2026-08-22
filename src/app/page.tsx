@@ -97,22 +97,31 @@ export default function Home() {
   };
 
   const pageClasses = activeEffects
-    .filter((effect) => effect.category !== "layer")
-    .map((effect) => effect.name)
-    .join(" ");
+  .filter(
+    (effect) =>
+      effect.category === "page" ||
+      effect.category === "button"
+  )
+  .map((effect) => effect.name)
+  .join(" ");
 
   const layerEffects = activeEffects
-    .filter((effect) => effect.category === "layer")
+    .filter(
+      (effect) =>
+        effect.category === "layer" ||
+        effect.category === "main"
+    )
     .map((effect) => effect.name);
 
   return (
     <main className={`page ${pageClasses}`}>
       {layerEffects.map((effectName) => (
-        <EffectsLayer
-          key={effectName}
-          effect={effectName}
-        />
-      ))}
+    <EffectsLayer
+      key={effectName}
+      effect={effectName}
+      count={count ?? 0}
+    />
+  ))}
 
       {error ? (
         <p>{error}</p>
@@ -156,6 +165,8 @@ export default function Home() {
     </main>
   );
 }
+
+
 
 
 

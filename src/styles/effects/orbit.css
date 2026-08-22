@@ -1,0 +1,110 @@
+/* ========================================
+   MAIN EFFECT - ORBIT
+======================================== */
+
+.effects-layer.orbit {
+  z-index: 6600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orbit-center {
+  position: absolute;
+
+  width: 36px;
+  height: 36px;
+
+  border-radius: 50%;
+
+  background: #e60000;
+
+  box-shadow:
+    0 0 20px rgba(230, 0, 0, 0.7),
+    0 0 50px rgba(230, 0, 0, 0.35);
+
+  animation: orbitCenterPulse 0.3s ease-in-out infinite alternate;
+}
+
+.orbit-button {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 70px;
+  height: 70px;
+
+  border-radius: 50%;
+
+  background: #e60000;
+
+  box-shadow:
+    0 5px 0 #a80000,
+    0 0 12px rgba(230, 0, 0, 0.4);
+
+  opacity: 0;
+
+  animation:
+    orbitButtonEffect 1.8s linear forwards;
+
+  animation-delay: var(--delay);
+}
+
+@keyframes orbitButtonEffect {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateX(0)
+      rotate(calc(var(--angle) * -1))
+      scale(0);
+  }
+
+  15% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateX(180px)
+      rotate(calc(var(--angle) * -1))
+      scale(var(--scale));
+  }
+
+  70% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--angle) + 720deg))
+      translateX(180px)
+      rotate(calc((var(--angle) + 720deg) * -1))
+      scale(var(--scale));
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      rotate(calc(var(--angle) + 1080deg))
+      translateX(0)
+      rotate(calc((var(--angle) + 1080deg) * -1))
+      scale(0);
+  }
+}
+
+@keyframes orbitCenterPulse {
+  from {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}

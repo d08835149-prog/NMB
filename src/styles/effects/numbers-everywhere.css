@@ -1,0 +1,143 @@
+/* ========================================
+   MAIN EFFECT - NUMBERS EVERYWHERE
+======================================== */
+
+.effects-layer.numbers-everywhere {
+  z-index: 6000;
+  perspective: 800px;
+}
+
+.flying-number {
+  position: absolute;
+
+  left: var(--x);
+  top: var(--y);
+
+  font-size: 34px;
+  font-weight: 800;
+
+  color: #111;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0)
+    rotate(var(--rotation));
+
+  animation: numberExplosion 1.15s
+    cubic-bezier(0.2, 0.8, 0.2, 1)
+    forwards;
+
+  animation-delay: var(--delay);
+}
+
+.mega-number {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  font-size: clamp(80px, 18vw, 280px);
+  font-weight: 900;
+
+  color: #e60000;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    scale(0.05);
+
+  text-shadow:
+    4px 4px 0 #ffffff,
+    8px 8px 0 rgba(0, 0, 0, 0.15);
+
+  animation: megaNumberExplosion 1.6s ease-out forwards;
+}
+
+
+@keyframes numberExplosion {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0)
+      rotate(var(--rotation));
+  }
+
+  15% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(var(--scale))
+      rotate(var(--rotation));
+  }
+
+  55% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(var(--scale))
+      rotate(var(--rotation));
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(calc(var(--scale) * 3))
+      rotate(0deg);
+  }
+}
+
+
+@keyframes megaNumberExplosion {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.05);
+  }
+
+  25% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.35);
+  }
+
+  55% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  75% {
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.15);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(4);
+  }
+}

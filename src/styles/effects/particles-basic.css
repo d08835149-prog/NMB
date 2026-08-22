@@ -1,0 +1,152 @@
+/* CONFETTI */
+
+.effects-layer.confetti .particle {
+  width: 10px;
+  height: 16px;
+  background: hsl(calc(var(--i) * 37), 90%, 55%);
+  animation: confettiParticle 0.9s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes confettiParticle {
+  from {
+    transform:
+      translate(-50%, -50%)
+      translate(0, 0)
+      rotate(0deg);
+
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      translate(
+        calc((var(--x) - 0.5) * 900px),
+        calc((var(--y) - 0.2) * 700px)
+      )
+      rotate(var(--r));
+
+    opacity: 0;
+  }
+}
+
+
+/* FIREWORKS */
+
+.effects-layer.fireworks .particle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(calc(var(--i) * 41), 100%, 60%);
+  box-shadow: 0 0 10px currentColor;
+  animation: fireworkParticle 0.8s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes fireworkParticle {
+  from {
+    transform:
+      translate(-50%, -50%)
+      translate(0, 0)
+      scale(1);
+
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      translate(
+        calc((var(--x) - 0.5) * 700px),
+        calc((var(--y) - 0.5) * 700px)
+      )
+      scale(0);
+
+    opacity: 0;
+  }
+}
+
+
+/* STARS */
+
+.effects-layer.stars .particle {
+  width: 16px;
+  height: 16px;
+  background: #ffd700;
+
+  clip-path: polygon(
+    50% 0%,
+    61% 35%,
+    98% 35%,
+    68% 57%,
+    79% 91%,
+    50% 70%,
+    21% 91%,
+    32% 57%,
+    2% 35%,
+    39% 35%
+  );
+
+  animation: starParticle 0.9s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes starParticle {
+  from {
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(0deg);
+
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      translate(
+        calc((var(--x) - 0.5) * 800px),
+        calc((var(--y) - 0.5) * 800px)
+      )
+      scale(0)
+      rotate(var(--r));
+
+    opacity: 0;
+  }
+}
+
+
+/* EXPLOSION */
+
+.effects-layer.explosion .particle {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: orange;
+
+  animation: explosionParticle 0.65s ease-out forwards;
+  animation-delay: var(--delay);
+}
+
+@keyframes explosionParticle {
+  from {
+    transform:
+      translate(-50%, -50%)
+      scale(1.5);
+
+    opacity: 1;
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      translate(
+        calc((var(--x) - 0.5) * 1000px),
+        calc((var(--y) - 0.5) * 1000px)
+      )
+      scale(0);
+
+    opacity: 0;
+  }
+}
