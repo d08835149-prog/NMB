@@ -1,0 +1,69 @@
+.fake-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f4f4f4;
+
+  pointer-events: none;
+
+  animation: fake-404-enter 0.12s ease-out;
+}
+
+.fake-404-content {
+  padding: 30px;
+
+  color: #111;
+  text-align: center;
+  font-family: monospace;
+}
+
+.fake-404-code {
+  font-size: clamp(100px, 20vw, 220px);
+  font-weight: 900;
+  line-height: 0.8;
+}
+
+.fake-404-title {
+  margin-top: 25px;
+
+  font-size: clamp(20px, 4vw, 38px);
+  font-weight: 800;
+}
+
+.fake-404-text {
+  margin-top: 18px;
+
+  color: #555;
+  font-size: 16px;
+}
+
+.fake-404-subtext {
+  margin-top: 40px;
+
+  color: #777;
+  font-size: 12px;
+
+  animation: fake-404-loading 0.8s ease-in-out infinite;
+}
+
+@keyframes fake-404-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fake-404-loading {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

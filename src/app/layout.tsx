@@ -12,6 +12,9 @@ import "../styles/effects/fake-crash.css";
 import "../styles/effects/red-flood.css";
 import "../styles/effects/orbit.css";
 import "../styles/responsive.css";
+import "../styles/effects/gravity.css";
+import "../styles/effects/counter-corrupt.css";
+import "../styles/effects/fake-404.css";
 
 
 

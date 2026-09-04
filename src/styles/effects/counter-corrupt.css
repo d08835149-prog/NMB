@@ -1,0 +1,92 @@
+.counter-corrupt {
+  overflow: hidden;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  pointer-events: none;
+}
+
+.corrupt-number {
+  position: absolute;
+
+  left: var(--x);
+  top: var(--y);
+
+  color: white;
+
+  font-family: monospace;
+  font-size: 26px;
+  font-weight: 700;
+
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--rotation))
+    scale(var(--scale));
+
+  animation:
+    corrupt-number-animation 1.2s steps(3, end)
+    var(--delay) forwards;
+}
+
+.corrupt-center {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  color: white;
+
+  font-family: monospace;
+  font-size: clamp(40px, 10vw, 130px);
+  font-weight: 900;
+
+  white-space: nowrap;
+
+  animation: corrupt-center-animation 0.15s steps(2) infinite;
+}
+
+@keyframes corrupt-number-animation {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  40% {
+    transform:
+      translate(-55%, -45%)
+      rotate(calc(var(--rotation) * -1))
+      scale(var(--scale));
+  }
+
+  65% {
+    transform:
+      translate(-45%, -55%)
+      rotate(var(--rotation))
+      scale(var(--scale));
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes corrupt-center-animation {
+  0% {
+    transform: translate(-51%, -50%);
+  }
+
+  50% {
+    transform: translate(-49%, -51%);
+  }
+
+  100% {
+    transform: translate(-50%, -49%);
+  }
+}

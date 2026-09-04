@@ -21,6 +21,11 @@ const layerEffects = [
   "fakeCrash",
   "redFlood",
   "orbit",
+
+  // NEW
+  "gravity",
+  "counterCorrupt",
+  "fake404",
 ];
 
 const emojis = [
@@ -248,6 +253,97 @@ export default function EffectsLayer({
           }
         />
       ))}
+    </div>
+  );
+  }
+
+  if (effect === "gravity") {
+  return (
+    <div className="effects-layer gravity" aria-hidden="true">
+      {Array.from({ length: 24 }).map((_, index) => (
+        <span
+          key={index}
+          className="gravity-button"
+          style={
+            {
+              "--x": `${Math.random() * 100}%`,
+              "--delay": `${Math.random() * 0.5}s`,
+              "--speed": `${0.8 + Math.random() * 0.7}s`,
+              "--rotation": `${Math.random() * 720 - 360}deg`,
+              "--scale": 0.4 + Math.random() * 0.8,
+            } as CSSProperties
+          }
+        />
+      ))}
+
+      <div className="gravity-ground-text">
+        GRAVITY ENABLED
+      </div>
+    </div>
+  );
+}
+
+if (effect === "counterCorrupt") {
+  return (
+    <div
+      className="effects-layer counter-corrupt"
+      aria-hidden="true"
+    >
+      {Array.from({ length: 30 }).map((_, index) => {
+        const fakeNumber =
+          count +
+          Math.floor(Math.random() * 9999999) -
+          Math.floor(Math.random() * 9999999);
+
+        return (
+          <span
+            key={index}
+            className="corrupt-number"
+            style={
+              {
+                "--x": `${Math.random() * 100}%`,
+                "--y": `${Math.random() * 100}%`,
+                "--delay": `${Math.random() * 0.3}s`,
+                "--rotation": `${Math.random() * 30 - 15}deg`,
+                "--scale": 0.5 + Math.random() * 1.5,
+              } as CSSProperties
+            }
+          >
+            {fakeNumber.toLocaleString()}
+          </span>
+        );
+      })}
+
+      <div className="corrupt-center">
+        {Math.floor(Math.random() * 999999999999).toLocaleString()}
+      </div>
+    </div>
+  );
+}
+
+if (effect === "fake404") {
+  return (
+    <div
+      className="effects-layer fake-404"
+      aria-hidden="true"
+    >
+      <div className="fake-404-content">
+        <div className="fake-404-code">
+          404
+        </div>
+
+        <div className="fake-404-title">
+          BUTTON NOT FOUND
+        </div>
+
+        <div className="fake-404-text">
+          The button may have never existed.
+        </div>
+
+        <div className="fake-404-subtext">
+          Attempting recovery...
+        </div>
+      </div>
     </div>
   );
   }

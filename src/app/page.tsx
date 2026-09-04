@@ -13,6 +13,15 @@ export default function Home() {
   const [count, setCount] = useState<number | null>(null);
   const [error, setError] = useState("");
   const [activeEffects, setActiveEffects] = useState<EffectItem[]>([]);
+  const [warningAccepted, setWarningAccepted] = useState<boolean | null>(null);
+  const [isClickLocked, setIsClickLocked] = useState(false);
+
+  useEffect(() => {
+    const accepted =
+      localStorage.getItem("nmb-photosensitivity-warning") === "accepted";
+
+    setWarningAccepted(accepted);
+  }, []);
 
   useEffect(() => {
     const loadCounter = async () => {
@@ -54,6 +63,15 @@ export default function Home() {
     };
   }, []);
 
+  const acceptWarning = () => {
+    localStorage.setItem(
+      "nmb-photosensitivity-warning",
+      "accepted"
+    );
+
+    setWarningAccepted(true);
+  };
+
   const runEffects = (selectedEffects: EffectItem[]) => {
     setActiveEffects([]);
 
@@ -79,6 +97,9 @@ export default function Home() {
   };
 
   const handleClick = async () => {
+    if (isClickLocked) return;
+
+    setIsClickLocked(true);
     setError("");
 
     triggerRandomEffects();
@@ -88,22 +109,23 @@ export default function Home() {
     if (error) {
       console.error(error);
       setError("Failed to update counter.");
-      return;
-    }
-
-    if (data !== null) {
+    } else if (data !== null) {
       setCount(Number(data));
     }
+
+    setTimeout(() => {
+      setIsClickLocked(false);
+    }, 150);
   };
 
   const pageClasses = activeEffects
-  .filter(
-    (effect) =>
-      effect.category === "page" ||
-      effect.category === "button"
-  )
-  .map((effect) => effect.name)
-  .join(" ");
+    .filter(
+      (effect) =>
+        effect.category === "page" ||
+        effect.category === "button"
+    )
+    .map((effect) => effect.name)
+    .join(" ");
 
   const layerEffects = activeEffects
     .filter(
@@ -113,15 +135,43 @@ export default function Home() {
     )
     .map((effect) => effect.name);
 
+  if (warningAccepted === null) {
+    return null;
+  }
+
   return (
     <main className={`page ${pageClasses}`}>
+      {!warningAccepted && (
+        <div className="warning-overlay">
+          <div className="warning-box">
+            <div className="warning-icon">⚠</div>
+
+            <h1 className="warning-title">
+              Flashing Lights Warning
+            </h1>
+
+            <p className="warning-text">
+              This site contains rapid flashing lights and visual effects
+              that may affect people with photosensitive epilepsy.
+            </p>
+
+            <button
+              className="warning-button"
+              onClick={acceptWarning}
+            >
+              I understand
+            </button>
+          </div>
+        </div>
+      )}
+
       {layerEffects.map((effectName) => (
-    <EffectsLayer
-      key={effectName}
-      effect={effectName}
-      count={count ?? 0}
-    />
-  ))}
+        <EffectsLayer
+          key={effectName}
+          effect={effectName}
+          count={count ?? 0}
+        />
+      ))}
 
       {error ? (
         <p>{error}</p>
@@ -137,6 +187,7 @@ export default function Home() {
             <button
               className="button"
               onClick={handleClick}
+              disabled={isClickLocked}
               aria-label="No Meaning Button"
             />
           </div>
@@ -165,8 +216,3 @@ export default function Home() {
     </main>
   );
 }
-
-
-
-
-
